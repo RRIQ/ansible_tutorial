@@ -1,0 +1,8 @@
+---
+  - hosts: master
+    become: true
+    tasks:
+      - name: Install latest apache
+        dnf:
+          name: httpd
+          state: present
