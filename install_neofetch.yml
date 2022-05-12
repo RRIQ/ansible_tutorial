@@ -1,0 +1,19 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repo index
+    dnf:
+      update_cache: yes    
+
+  - name: install neofetch package
+    dnf:
+      name: neofetch
+      state: latest
+
+  - name: add gedit package
+    dnf:
+      name: gedit
+      state: latest

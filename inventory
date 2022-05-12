@@ -6,5 +6,6 @@
 
 
 [master:vars]
-
+ansible_key_pass=/home/rick/.ssh/Ansible
 [nodes:vars]
+ansible_key_pass=/home/rick/.ssh/Ansible
