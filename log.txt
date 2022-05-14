@@ -1,0 +1,28 @@
+
+PLAY [all] **************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **************************************************************************************************************************************************
+ok: [192.168.0.150]
+ok: [192.168.0.146]
+ok: [192.168.0.144]
+
+TASK [update repo index] ************************************************************************************************************************************************
+skipping: [192.168.0.144]
+skipping: [192.168.0.146]
+skipping: [192.168.0.150]
+
+TASK [install neofetch package] *****************************************************************************************************************************************
+skipping: [192.168.0.144]
+skipping: [192.168.0.146]
+skipping: [192.168.0.150]
+
+TASK [add gedit package] ************************************************************************************************************************************************
+fatal: [192.168.0.144]: FAILED! => {"msg": "The conditional check 'ansible_distribution == \"fedora' failed. The error was: template error while templating string: unexpected char '\"' at 30. String: {% if ansible_distribution == \"fedora %} True {% else %} False {% endif %}\n\nThe error appears to be in '/home/rick/ansible_tutorial/install_neofetch_multiple_distros.yml': line 18, column 5, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n  - name: add gedit package\n    ^ here\n"}
+fatal: [192.168.0.146]: FAILED! => {"msg": "The conditional check 'ansible_distribution == \"fedora' failed. The error was: template error while templating string: unexpected char '\"' at 30. String: {% if ansible_distribution == \"fedora %} True {% else %} False {% endif %}\n\nThe error appears to be in '/home/rick/ansible_tutorial/install_neofetch_multiple_distros.yml': line 18, column 5, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n  - name: add gedit package\n    ^ here\n"}
+fatal: [192.168.0.150]: FAILED! => {"msg": "The conditional check 'ansible_distribution == \"fedora' failed. The error was: template error while templating string: unexpected char '\"' at 30. String: {% if ansible_distribution == \"fedora %} True {% else %} False {% endif %}\n\nThe error appears to be in '/home/rick/ansible_tutorial/install_neofetch_multiple_distros.yml': line 18, column 5, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n  - name: add gedit package\n    ^ here\n"}
+
+PLAY RECAP **************************************************************************************************************************************************************
+192.168.0.144              : ok=1    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+192.168.0.146              : ok=1    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+192.168.0.150              : ok=1    changed=0    unreachable=0    failed=1    skipped=2    rescued=0    ignored=0   
+

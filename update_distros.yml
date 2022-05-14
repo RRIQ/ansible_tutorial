@@ -4,9 +4,11 @@
   become: true
   tasks:
 
-  - name: update repo index
+  - name: Install updates in fedora
     dnf:
-      update_cache: yes    
+      update_cache: yes
+      update_only: yes
+    when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"   
 
   - name: install neofetch and gedit packages all boxes
     package:

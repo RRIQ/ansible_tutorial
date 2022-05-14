@@ -1,0 +1,19 @@
+---
+
+- hosts: master
+  become: yes
+  tasks:
+    - name: install public keys
+      ansible.posix.authorized_key:
+       user: rick
+       state: present
+       key: "{{ lookup('file', '/home/rick/.ssh/Ansible.pub') }}"
+
+- hosts: nodes
+  become: yes
+  tasks:
+    - name: install public keys
+      ansible.posix.authorized_key:
+       user: rick
+       state: present
+       key: "{{ lookup('file', '/home/rick/.ssh/Ansible.pub') }}"

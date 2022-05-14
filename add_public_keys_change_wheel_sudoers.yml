@@ -1,0 +1,33 @@
+---
+
+- hosts: master
+  become: yes
+  tasks:
+    - name: install public keys
+      ansible.posix.authorized_key:
+       user: rick
+       state: present
+       key: "{{ lookup('file', '/home/rick/.ssh/Ansible.pub') }}"
+    - name: Validate the sudoers file before saving
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
+
+- hosts: nodes
+  become: yes
+  tasks:
+    - name: install public keys
+      ansible.posix.authorized_key:
+       user: rick
+       state: present
+       key: "{{ lookup('file', '/home/rick/.ssh/Ansible.pub') }}"
+    - name: Validate the sudoers file before saving
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
