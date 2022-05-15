@@ -24,6 +24,22 @@
       state: latest
     when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
 
+  - name: installing apache2 Fedora
+    tags: httpd,Fedora
+    dnf: 
+      name: httpd
+      state: latest
+    when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
+
+  - name: copy default html file for site
+    tags: apache,apache2,httpd
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644 
+
 # Next line IP dont exist | let's assume the IP belongs to a ubuntu machine
 
 #- name: install apache2 and php for Ubuntu
