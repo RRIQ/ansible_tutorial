@@ -5,17 +5,20 @@
   tasks:
 
   - name: update repo index
+    tags: always
     dnf:
       update_cache: yes
     when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"   
 
   - name: install neofetch package
+    tags: neofetch,Fedora
     dnf:
       name: neofetch
       state: latest
     when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
 
   - name: add gedit package
+    tags: gedit,Fedora
     dnf:
       name: gedit
       state: latest
