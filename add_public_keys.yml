@@ -9,7 +9,7 @@
        state: present
        key: "{{ lookup('file', '/home/rick/.ssh/Ansible.pub') }}"
 
-- hosts: nodes
+- hosts: ubuntu
   become: yes
   tasks:
     - name: install public keys

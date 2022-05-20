@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Install updates (Fedora)
+    tags: always
+    dnf:
+      update_cache: yes
+      update_only: yes
+    when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
+
+  - name: Install updates (ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+      upgrade: dist
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create rr user
+    tags: always
+    user:
+      name: rr
+      groups: root
+
+  - name: add ssh key for rr
+    tags: always
+    authorized_key:
+      user: rr
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDoFLvvOGXIp8uLGCHVxcO9gy7YvRWzivWsuraAXgmTN Ansible"
+
+  - name: add sudoers file for rr
+    tags: always
+    copy:
+      src: sudoers_rr
+      dest: /etc/sudoers.d/rr
+      owner: root
+      group: root
+      mode: 0440
+
+
