@@ -1,0 +1,17 @@
+- name: install apache and php for ubuntu servers
+  tags: apache,apache2,ubuntu
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: install apache and php for fedora servers
+  tags: apache,fedora,httpd
+  dnf:
+    name:
+      - httpd
+      - php
+    state: latest
+  when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"

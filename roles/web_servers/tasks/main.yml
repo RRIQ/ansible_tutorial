@@ -1,0 +1,51 @@
+- name: install apache and php for ubuntu servers
+  tags: apache,apache2,ubuntu
+  apt:
+    name:
+      - apache2
+      - libapache2-mod-php
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: install apache and php for fedora servers
+  tags: apache,fedora,httpd
+  dnf:
+    name:
+      - httpd
+      - php
+    state: latest
+  when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
+
+- name: start httpd (Fedora)
+  tags: httpd,apache,fedora
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+  when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"
+
+- name: change e-mail address for admin
+  tags: apache,fedora,httpd
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^ServerAdmin'
+    line: ServerAdmin riquelmen1990@live.com
+  when: ansible_distribution == "Fedora" and ansible_distribution_version == "35"  
+  register: httpd
+
+
+- name: restart httpd (Fedora)
+  tags: apache,fedora,httpd
+  service:
+    name: httpd
+    state: restarted
+  when: httpd.changed
+
+- name: copy default html file for site
+  tags: apache,apache2,httpd
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644

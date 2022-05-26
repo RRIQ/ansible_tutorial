@@ -1,0 +1,4 @@
+- name: add ssh key for rr
+  authorized_key:
+    user: rr
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDoFLvvOGXIp8uLGCHVxcO9gy7YvRWzivWsuraAXgmTN Ansible"
