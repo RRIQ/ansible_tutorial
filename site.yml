@@ -32,7 +32,7 @@
     tags: always
     authorized_key:
       user: rr
-      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDoFLvvOGXIp8uLGCHVxcO9gy7YvRWzivWsuraAXgmTN Ansible"
+      key: "ssh-redacted"
 
   - name: add sudoers file for rr
     tags: always
